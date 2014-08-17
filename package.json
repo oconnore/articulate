@@ -1,0 +1,33 @@
+{
+  "name": "articulate",
+  "description": "A document preparation system",
+  "homepage": "http://github.com/oconnore/articulate.git",
+  "version": "0.1.0",
+  "engines": {
+    "node": ">=0.10.22"
+  },
+  "maintainers": [
+    {
+      "name": "Eric O'Connor",
+      "email": "eric@bocoup.com",
+      "web": "http://bocoup.com"
+    }
+  ],
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/oconnore/articulate.git"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "./LICENSE"
+    }
+  ],
+  "dependencies": {
+    "jison": "^0.4.14",
+    "lodash": "^2.4.1",
+    "readable-stream": "^1.0.27-1",
+    "through2": "^0.6.1"
+  }
+}

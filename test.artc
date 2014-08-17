@@ -1,0 +1,155 @@
+\class(card){
+  \interfaces(image, font, table)
+  \macros(ams-math)
+  \display{
+    \html{
+      \render(html-article)
+      \template(jade, base.jade)
+      \css(style.css)
+      \js(justify.js)
+    }
+    \pdf{
+      \render(latex-ieee-article)
+    }
+  }
+}
+
+artc --info file.art
+
+\title{This is the title of my slides}
+
+\section(Developing this syntax, short=syntax){
+  \title
+  
+}
+\slide(Title of slide, ref=s1){
+  \comment{
+    Ignore this slide
+  }
+  \title
+
+  # this
+  # that
+  # the other thing
+  * what
+  * is
+  * this
+  + that
+  + is cool
+}
+
+*emphasis*
+**strong**
+_underline_
+
+ordered and unordered lists
+
+-one
+-two
+  -three
+  -three
+-three
+
+1 one
+1 two
+  - three
+  - three
+1 three
+
+
+\basefont(Helvetica, 12pt)
+\size(2.5in, 1.5in)
+\margin(.5in)
+
+\content{
+hello macro
+  \123
+\env{%md(hi) | minify(true) <EOF384
+hello world
+EOF384
+
+\tag(eq1){ %math < EOF
+
+EOF }
+
+
+Markdown import:
+
+lists
+  ul & ol
+emphasis
+hr
+quotes
+headers
+
+
+1. \quote{
+  \em{ Hello world }
+}
+1. This
+1. That
+
+\ref(ymeta){%yaml < EOF
+test: 34
+EOF}
+\ref(jmeta){%yaml < EOF
+test: 35
+EOF}
+
+\yamlref(metadata.test){
+  \control($--)
+  \jsonref(jmeta.test){
+    \control($+-)
+    $--1 = $+-1
+  }
+}
+
+\table{
+  \head(x, y)
+  \row(1,1)
+  \row(2,4)
+  \row(3,9)
+  \tr{
+    \td{4}
+    \td{16}
+  }
+}
+
+%ams<EOF
+x = {-b \pm \sqrt{b^2-4ac} \over 2a}.
+EOF
+
+
+\ref(eq1){
+  The equation was:
+  \ins
+}
+
+\include(file)
+
+  \title{*Hello* there!}
+  \subtitle{Testing the new layout engine}
+  \toc{   }
+  test this thing
+  \hi(there)
+  \em{cool! this is easy to write}
+  # "testing"
+
+  \cite{Author:YearJR}
+  \Finalize
+  \biblio
+}
+"this is a double quote"
+.
+
+
+
+
+\command
+\command(1,2,3)
+
+\quote{
+  The \em{end is nigh} !
+}
+}
+
