@@ -1,23 +1,50 @@
 var _ = require('lodash');
+var WeakMap = require('enumerable-collections').WeakMap;
 
-function Article(els) {
-  console.log('Article called', els);
-  this.children = els;
+var priv = new WeakMap();
+
+function AstPrivate() {
+  this.children = [];
 }
 
-function Elements(els, unit) {
-  console.log('Elements called', els, unit);
-  if (!Array.isArray(els)) {
-    els = [];
+function AstNode(o) {
+  if (this.__proto__ === AstNode.prototype) {
+    throw new Error('abstract class');
   }
-  this.children = els.concat([unit]);
+  var defpriv = new AstPrivate();
+  if (o && (o instanceof AstNode)) {
+    defpriv.children = o.children;
+  }
+  priv.set(this, defpriv);
 }
+AstNode.prototype.constructor = AstNode;
+Object.defineProperty(AstNode.prototype, 'children' {
+  get: function(){
+    return priv.get(this).children;
+  },
+  set: function(val) {
+    if (!Object.isFrozen(this)) {
+      priv.get(this).children = val;
+    }
+  }
+});
+
+AstNode.prototype.lock = function() {
+  Object.freeze(this);
+};
+
+AstNode.prototype.clone = function() {
+  return new (this.__proto__.constructor)(this);
+};
 
 function Command(name, args, body) {
   this.name = name;
   this.args = args;
   this.body = body;
+  AstNode.call(this);
 }
+Command.prototype = Object.create(AstNode.prototype);
+Command.prototype
 
 function Macro(name, params, pipes, env) {
   this.name = name;
@@ -25,7 +52,9 @@ function Macro(name, params, pipes, env) {
   this.pipes = pipes;
   this.body = [];
   this.init(env);
+  AstNode.call(this);
 }
+Macro.prototype = Object.create(AstNode.prototype);
 Macro.prototype.init = function(env) {
   var lex = env.lexer;
   var startLine = lex.yylineno;
@@ -71,6 +100,11 @@ Macro.prototype.init = function(env) {
   this.body = this.body.join('');
 };
 
+function Pipe(name, args) {
+  this.name = name;
+  this.args = args;
+}
+
 function unify(arr) {
   var col = [], strl = [];
   var str = false;
@@ -99,8 +133,7 @@ function unify(arr) {
 }
 
 module.exports = _.reduce([
-  Article, Elements, Command,
-  Macro, unify
+  Command, Macro, unify
 ], function(col, ctor) {
   col[ctor.name] = ctor;
   return col;
