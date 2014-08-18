@@ -13,7 +13,9 @@
       "web": "http://bocoup.com"
     }
   ],
-  "scripts": {},
+  "scripts": {
+    "build": "jison src/grammar.jison -o src/grammar.js -p lalr"
+  },
   "repository": {
     "type": "git",
     "url": "http://github.com/oconnore/articulate.git"
@@ -29,5 +31,8 @@
     "lodash": "^2.4.1",
     "readable-stream": "^1.0.27-1",
     "through2": "^0.6.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.7"
   }
 }
