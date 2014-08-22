@@ -82,21 +82,31 @@ premacro
 
 pipe
   : '|' wref 
-    {$$ = ['pipe', $2];}
+    {$$ = [new yy.Pipe($2)];}
   | '|' WS wref 
-    {$$ = ['pipe', $3];}
+    {$$ = [new yy.Pipe($3)];}
   | '|' wref params
-    {$$ = ['pipe', $2, $3];}
+    {$$ = [new yy.Pipe($2, $3)];}
   | '|' WS wref params
-    {$$ = ['pipe', $3, $4];}
+    {$$ = [new yy.Pipe($3, $4)];}
+
   | pipe '|' wref 
-    {$$ = $1.concat(['pipe', $3]);}
+    {$$ = $1.concat([new yy.Pipe($3)]);}
   | pipe '|' WS wref 
-    {$$ = $1.concat(['pipe', $4]);}
+    {$$ = $1.concat([new yy.Pipe($4)]);}
   | pipe '|' wref params
-    {$$ = $1.concat(['pipe', $3, $4]);}
+    {$$ = $1.concat([new yy.Pipe($3, $4)]);}
   | pipe '|' WS wref params
-    {$$ = $1.concat(['pipe', $4, $5]);}
+    {$$ = $1.concat([new yy.Pipe($4, $5)]);}
+
+  | pipe WS '|' wref 
+    {$$ = $1.concat([new yy.Pipe($3)]);}
+  | pipe WS '|' WS wref 
+    {$$ = $1.concat([new yy.Pipe($4)]);}
+  | pipe WS '|' wref params
+    {$$ = $1.concat([new yy.Pipe($4, $5)]);}
+  | pipe WS '|' WS wref params
+    {$$ = $1.concat([new yy.Pipe($5, $6)]);}
   ;
 
 body
@@ -139,7 +149,7 @@ pentity
   | paramControl
     {$$ = $1;}
   | pentity WS
-    {$$ = $1 + $2;}
+    {$$ = $1;}
   | pentity WORD 
     {$$ = $1 + $2;}
   | pentity string

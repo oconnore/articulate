@@ -1,0 +1,28 @@
+test34\hi\bye) toast
+
+\%fox
+\ns:car{%md(tst arg1, test arg2) |
+blah(d, cat)
+< EOF345
+cake 123
+EOF345}\p
+%macro | markdown | tolatex(5) | pp < EOF123
+
+LATEX IS GREAT
+
+EOF123
+
+%test<EOFF
+hi
+EOFF
+
+\test(cats,dogs){
+  \there
+}
+
+\orangutang(this)cat
+
+(this is cool)
+{{{
+
+\}

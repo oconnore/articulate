@@ -1,0 +1,3 @@
+%qmacro( p) | pipe(q ) <<test macro %%%{}()\|>>
+%qmacro <<
+>>

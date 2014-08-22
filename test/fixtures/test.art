@@ -42,6 +42,33 @@ artc --info file.art
 **strong**
 _underline_
 
+\block(greet){
+  Hello \refv(name)
+}
+
+\ref(block){
+  \set(test.a){Eric O'Connor}
+  \set(name){Eric O'Connor}
+}
+
+%macro | context(blah) <E
+hello world
+E
+
+%macro<<Data that is here>>
+
+\ref(greet, ctx)
+
+\yaml(ctx){
+name: Eric O'Connor
+}
+\context{\json{{
+      "hello": "world"
+  \}}}
+
+\ref(block)
+\refv(test.a)
+
 ordered and unordered lists
 
 -one

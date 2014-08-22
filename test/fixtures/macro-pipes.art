@@ -1,0 +1,7 @@
+%macro(a,b) | pipe1("quote") | pipe2() <EOF
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+ccccccccccccccccccccccccccccc
+~!@#$%^&*()_+=-0987654321
+,./;'[]\<>?:"{}|
+EOF
